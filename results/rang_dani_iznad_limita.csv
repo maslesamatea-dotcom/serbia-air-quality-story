@@ -1,0 +1,49 @@
+stanica,godina,dana_iznad,dana_mjerenja,prosjek
+Beograd Mostar,2022,47,361,26.8
+Beograd Mostar,2023,29,363,23.5
+Beograd Mostar,2024,69,356,32.3
+Beograd Novi Beograd,2022,40,356,30.4
+Beograd Novi Beograd,2023,30,360,26.8
+Beograd Novi Beograd,2024,55,360,32.1
+Beograd Stari grad,2022,63,352,34.9
+Beograd Stari grad,2023,42,362,29.9
+Beograd Stari grad,2024,58,364,33.6
+Beograd Zeleno brdo,2022,27,362,27.3
+Beograd Zeleno brdo,2023,24,364,26.5
+Beograd Zeleno brdo,2024,34,362,29.1
+Beočin Centar,2022,16,314,22.6
+Beočin Centar,2023,11,354,22.2
+Beočin Centar,2024,43,362,28.5
+Niš IZJZ Niš,2022,59,363,29.1
+Niš IZJZ Niš,2023,60,365,31.4
+Niš IZJZ Niš,2024,77,361,36.2
+Niš O.š. Sveti Sava,2022,74,343,37.2
+Niš O.š. Sveti Sava,2023,71,365,36.7
+Niš O.š. Sveti Sava,2024,81,366,38.3
+Novi Pazar,2022,136,360,48.6
+Novi Pazar,2023,118,346,45.0
+Novi Pazar,2024,133,364,49.7
+Obrenovac Centar,2022,61,270,39.3
+Obrenovac Centar,2023,49,349,29.9
+Obrenovac Centar,2024,110,365,45.8
+Pirot,2022,105,365,38.8
+Pirot,2023,60,358,32.5
+Pirot,2024,56,363,31.8
+Popovac,2022,139,358,49.1
+Popovac,2023,137,355,48.6
+Popovac,2024,174,357,58.8
+Smederevo Centar,2022,67,364,32.1
+Smederevo Centar,2023,38,312,28.0
+Smederevo Centar,2024,61,363,29.0
+Smederevo Radinac,2022,123,351,46.5
+Smederevo Radinac,2023,64,358,36.6
+Smederevo Radinac,2024,133,363,47.3
+Užice,2022,162,361,60.8
+Užice,2023,91,317,44.8
+Užice,2024,115,359,46.3
+Valjevo,2022,143,356,50.9
+Valjevo,2023,120,363,45.3
+Valjevo,2024,148,358,54.3
+Čačak,2022,82,365,36.1
+Čačak,2023,49,357,30.4
+Čačak,2024,66,364,31.1

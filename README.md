@@ -4,7 +4,8 @@ Istraživanje javnih podataka o kvalitetu vazduha u Srbiji: koliko dana pojedine
 
 Autor: Matea Masleša
 
-**Interaktivna stranica:** https://claude.ai/artifact/79ShYw9ZDpPFwcJiQwrdsj
+**Interaktivna stranica:** https://maslesamatea-dotcom.github.io/serbia-air-quality-story/
+
 ## Podaci
 
 - Dnevni prosjeci PM10 (µg/m³) sa **16 stanica državne mreže**, 2022–2024. Izvor: Agencija za zaštitu životne sredine (SEPA), portal otvorenih podataka data.gov.rs.
@@ -76,6 +77,7 @@ Zaključak je da je podjela upotrebljiva, ali da je granica između grupa **meka
 ## Struktura i pokretanje
 
 ```
+docs/      interaktivna stranica (index.html, objavljena preko GitHub Pages)
 data/      pm10_dnevno_2022_2024.csv
 src/       01_analysis.py, 02_kmeans_stations.py, 03_figures.py
 results/   tabele (csv) i grafici (png)
@@ -89,3 +91,5 @@ python src/03_figures.py
 ```
 
 Skripte se pokreću redom iz korijena repozitorija.
+
+Interaktivna stranica (`docs/index.html`) je samostalan fajl koji se otvara u pregledaču bez instalacije. Koristi biblioteku [d3](https://d3js.org) (ISC licenca), koja je uključena u fajl.

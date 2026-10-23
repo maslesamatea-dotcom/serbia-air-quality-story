@@ -4,8 +4,7 @@ Istraživanje javnih podataka o kvalitetu vazduha u Srbiji: koliko dana pojedine
 
 Autor: Matea Masleša
 
-**Interaktivna stranica:** [DOPUNI: link, nakon što podijeliš stranicu]
-
+**Interaktivna stranica:** https://claude.ai/artifact/79ShYw9ZDpPFwcJiQwrdsj
 ## Podaci
 
 - Dnevni prosjeci PM10 (µg/m³) sa **16 stanica državne mreže**, 2022–2024. Izvor: Agencija za zaštitu životne sredine (SEPA), portal otvorenih podataka data.gov.rs.

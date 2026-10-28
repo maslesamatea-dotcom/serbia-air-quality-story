@@ -1,86 +1,88 @@
-# Kako Srbija diše: analiza i grupisanje mjernih stanica PM10
+# How Serbia Breathes: Analysis and Clustering of PM10 Monitoring Stations
 
-Istraživanje javnih podataka o kvalitetu vazduha u Srbiji: koliko dana pojedine stanice prelaze limit, kako se zagađenje mijenja kroz godinu i sedmicu, i koje stanice "dišu" na isti način (K-Means grupisanje).
+**Language:** English | [Srpski](README.sr.md)
 
-Autor: Matea Masleša
+An exploration of public air-quality data for Serbia: how many days each station exceeds the limit, how pollution changes over the year and the week, and which stations "breathe" in the same way (K-Means clustering).
 
-**Interaktivna stranica:** https://maslesamatea-dotcom.github.io/serbia-air-quality-story/
+Author: Matea Masleša
 
-## Podaci
+**Interactive page:** https://maslesamatea-dotcom.github.io/serbia-air-quality-story/ (in Serbian)
 
-- Dnevni prosjeci PM10 (µg/m³) sa **16 stanica državne mreže**, 2022–2024. Izvor: Agencija za zaštitu životne sredine (SEPA), portal otvorenih podataka data.gov.rs.
-- Fajl `data/pm10_dnevno_2022_2024.csv` je spojen iz godišnjih fajlova (postupak je opisan u repozitoriju *valjevo-air-quality-prediction*, skripta `01_prepare_data.py`). Provjerite licencu SEPA skupova na portalu prije ponovne upotrebe.
-- Dnevni limit korišćen u analizi: **50 µg/m³**.
+## Data
 
-## Šta je rađeno
+- Daily PM10 means (µg/m³) from **16 national-network stations**, 2022–2024. Source: Serbian Environmental Protection Agency (SEPA), via the open data portal data.gov.rs.
+- The file `data/pm10_dnevno_2022_2024.csv` is merged from yearly files (the procedure is described in the repository *valjevo-air-quality-prediction*, script `01_prepare_data.py`). Check the licence of the SEPA datasets on the portal before reusing them.
+- Daily limit used in the analysis: **50 µg/m³**.
 
-1. **Dani iznad limita** po stanici i godini (`src/01_analysis.py`).
-2. **Vikend naspram radnog dana** u grijnoj sezoni (novembar–februar).
-3. **Sezonalnost:** udio mjerenja iznad limita po mjesecima.
-4. **Grupisanje stanica** (`src/02_kmeans_stations.py`): K-Means sa dvije grupe nad 15 obilježja po stanici (12 relativnih mjesečnih prosjeka, odnos zime i ljeta, vikend razlika, logaritam prosječnog nivoa), uz standardizaciju. Oznake grupa se poravnavaju tako da je grupa A ona sa većim omjerom zime i ljeta.
-5. **Provjera pouzdanosti grupa:** silhouette, poređenje sa hijerarhijskim (Ward) grupisanjem i stabilnost grupa kad se svaka godina grupiše zasebno (adjusted Rand index).
+## What was done
 
-## Rezultati
+1. **Days above the limit** per station and year (`src/01_analysis.py`).
+2. **Weekend vs weekday** in the heating season (November–February).
+3. **Seasonality:** share of measurements above the limit by month.
+4. **Station clustering** (`src/02_kmeans_stations.py`): K-Means with two clusters on 15 features per station (12 relative monthly means, winter-to-summer ratio, weekend difference, log of the average level), after standardisation. Cluster labels are aligned so that group A is the one with the higher winter-to-summer ratio.
+5. **Cluster reliability checks:** silhouette score, comparison with hierarchical (Ward) clustering, and stability when each year is clustered separately (adjusted Rand index).
 
-**Dani iznad limita, 2024.**
+## Results
 
-![rang](results/01_rang_stanica_2024.png)
+**Days above the limit, 2024**
 
-- Najviše: **Popovac, 174 dana**; najmanje: **Beograd Zeleno brdo, 34 dana**, odnosno pet puta manje.
+![ranking](results/01_rang_stanica_2024.png)
 
-**Jedna stanica, jedna godina**
+- Most: **Popovac, 174 days**; fewest: **Beograd Zeleno brdo, 34 days**, i.e. about five times fewer.
 
-![kalendar](results/02_kalendar_valjevo_2024.png)
+**One station, one year**
 
-**Vikend je čistiji, ali ne svuda**
+![calendar](results/02_kalendar_valjevo_2024.png)
 
-![vikend](results/03_vikend_efekat.png)
+**Weekends are cleaner, but not everywhere**
 
-- U zimskim mjesecima je PM10 vikendom niži za **18%** u Valjevu i Popovcu, a samo **3%** na Beočinu. Razlog se iz ovih podataka ne može utvrditi.
+![weekend](results/03_vikend_efekat.png)
 
-**Sezonalnost**
+- In winter months PM10 is **18%** lower on weekends in Valjevo and Popovac, but only **3%** lower in Beočin. The cause cannot be determined from these data.
 
-![sezona](results/04_sezonalnost.png)
+**Seasonality**
 
-- Iznad limita je bilo oko **48%** mjerenja u decembru i **45%** u januaru, a samo **2 do 5%** od maja do avgusta.
+![seasonality](results/04_sezonalnost.png)
 
-**Grupe stanica**
+- About **48%** of measurements were above the limit in December and **45%** in January, but only **2 to 5%** from May to August.
 
-![grupe](results/05_grupe_stanica.png)
+**Station groups**
 
-| Grupa | Broj stanica | Omjer zima/ljeto (prosjek) |
+![groups](results/05_grupe_stanica.png)
+
+| Group | Stations | Winter/summer ratio (mean) |
 |---|---|---|
-| Izraženo zimska | 10 (Novi Pazar, Niš ×2, Valjevo, Pirot, Smederevo Centar, Čačak, Beograd Mostar, Užice, Obrenovac) | oko 3 |
-| Ujednačenija | 6 (Smederevo Radinac, Beograd ×3, Beočin, Popovac) | oko 1,6 |
+| Strongly winter-peaked | 10 (Novi Pazar, Niš ×2, Valjevo, Pirot, Smederevo Centar, Čačak, Beograd Mostar, Užice, Obrenovac) | about 3 |
+| More even through the year | 6 (Smederevo Radinac, Beograd ×3, Beočin, Popovac) | about 1.6 |
 
-Svi brojevi su u `results/`.
+All numbers are in `results/`.
 
-## Koliko je grupisanje pouzdano
+## How reliable is the clustering?
 
-| Mjera | Vrijednost | Značenje |
+| Measure | Value | Meaning |
 |---|---|---|
-| Silhouette | 0,32 | slabo do umjereno razdvajanje grupa |
-| Slaganje sa Ward grupisanjem (ARI) | 1,00 | drugi metod daje isti raspored |
-| Slaganje rasporeda među godinama (ARI, prosjek) | 0,30 | grupe se djelimično mijenjaju iz godine u godinu |
+| Silhouette | 0.32 | weak to moderate separation of groups |
+| Agreement with Ward clustering (ARI) | 1.00 | a second method gives the same assignment |
+| Agreement between years (ARI, mean) | 0.30 | groups change partly from year to year |
 
-Zaključak je da je podjela upotrebljiva, ali da je granica između grupa **meka**. Tabela `results/klasteri_stanice.csv` ima i kolonu `godina_u_grupi` (u koliko od 3 godine je stanica u istoj grupi kao u ukupnom rješenju); najnestalnija je stanica Obrenovac Centar.
+The conclusion is that the split is usable, but the boundary between the groups is **soft**. The table `results/klasteri_stanice.csv` also has a column `godina_u_grupi` (in how many of the 3 years the station is in the same group as in the overall solution); the least stable station is Obrenovac Centar.
 
-## Ograničenja
+## Limitations
 
-- Samo **16 stanica**, što je malo za klasterovanje, pa je rezultat istraživački.
-- Dnevni prosjeci kriju kratke vrhove unutar dana.
-- Za neke dane mjerenja nedostaju. Mjesec sa manje od 15 dana mjerenja ne ulazi u profil stanice, a rijetke rupe se popunjavaju susjednim mjesecima.
-- Iz podataka se ne vidi **zašto** neka stanica ima određeni obrazac (grijanje, industrija, položaj), samo kako se ponaša.
-- Jedan dan iznad limita nije isto što i prekoračenje godišnje dozvoljenog broja dana.
-- Ovo je analiza javnih podataka, a ne zdravstvena procjena.
+- Only **16 stations**, which is small for clustering, so the result is exploratory.
+- Daily means hide short peaks within a day.
+- Some days have no measurements. A month with fewer than 15 measured days is excluded from a station's profile, and rare gaps are filled from neighbouring months.
+- The data do not show **why** a station has a given pattern (heating, industry, location), only how it behaves.
+- One day above the limit is not the same as exceeding the annual permitted number of days.
+- This is an analysis of public data, not a health assessment.
 
-## Struktura i pokretanje
+## Structure and usage
 
 ```
-docs/      interaktivna stranica (index.html, objavljena preko GitHub Pages)
+docs/      interactive page (index.html, published via GitHub Pages)
 data/      pm10_dnevno_2022_2024.csv
 src/       01_analysis.py, 02_kmeans_stations.py, 03_figures.py
-results/   tabele (csv) i grafici (png)
+results/   tables (csv) and figures (png)
 ```
 
 ```bash
@@ -90,6 +92,6 @@ python src/02_kmeans_stations.py
 python src/03_figures.py
 ```
 
-Skripte se pokreću redom iz korijena repozitorija.
+Run the scripts in order from the repository root.
 
-Interaktivna stranica (`docs/index.html`) je samostalan fajl koji se otvara u pregledaču bez instalacije. Koristi biblioteku [d3](https://d3js.org) (ISC licenca), koja je uključena u fajl.
+The interactive page (`docs/index.html`) is a standalone file that opens in a browser with no installation. It uses the [d3](https://d3js.org) library (ISC licence), which is included in the file. The page itself is in Serbian.
